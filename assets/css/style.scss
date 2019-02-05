@@ -2,4 +2,36 @@
 ---
 
 @import "{{ site.theme }}";
+@import "minima/base";
 @import "minima/layout";
+
+.site-title {
+    &:hover {
+        text-decoration: none;
+    }
+}
+.post-link {
+    &:hover {
+        text-decoration: none;
+    }
+    &:visited {
+        color: $grey-color-dark;
+    }
+    text-decoration: none;
+} 
+
+.site-footer {
+    padding: 10px 0;
+}
+
+.contact-list {
+    margin-bottom: 0;
+}
+
+.footer-col {
+    margin-bottom: 0;
+}
+
+.feed-subscribe {
+    margin-bottom: 0;
+}

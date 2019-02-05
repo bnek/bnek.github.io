@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Blaah!"
+date:   2019-02-05 16:16:06 +1000
+categories: code
+---
+HA!
+see this `code`.
+```
+const bla = 1;
+const blub = 1;
+const blaBlub = bla + blub;
+```
+
+So. that's it.
