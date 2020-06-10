@@ -4,7 +4,7 @@ title:  "From gulp to webpack"
 date:   2020-06-10 16:16:06 +1000
 categories: code
 ---
-## Intro
+## Intro bla
 `webpack` brought much convenience into web development. Together with `npm` or `yarn`, `webpack` enables us to be productive on a new project from day 1. However, there are still heaps of projects around that were built before webpack came along relying on ageing tools like i.e. `gulp` or `grunt` sometimes even using the outdated package manager `bower`.
 
 Over time it becomes increasingly difficult to maintain a working build/deployment pipeline, updating dependencies i.e. to address exposed vulnerabilities, or simply adding new functionality to the website using latest dependencies which i.e. might not be available though `bower`.
