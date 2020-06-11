@@ -106,6 +106,7 @@ Below is the configuration for each of the [loaders](https://webpack.js.org/conc
   },
   ```
 * _**CSS / Less Files**_ loader config:
+
   <details>
     <summary>Click to expand!</summary>
 
