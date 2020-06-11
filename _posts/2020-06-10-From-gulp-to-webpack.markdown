@@ -47,6 +47,7 @@ I took a look at the [webpack docs](https://webpack.js.org/guides/getting-starte
 * add an `index.js` entry point for webpack
 * add an `index.html` template to inject the emitted bundles into (optional) (I used the old gulp template because it had links to external scripts and other required code).
 * webpack now runs using `npm run dev`
+
 ------
 
 ### 2.1.1 Running the dev server
