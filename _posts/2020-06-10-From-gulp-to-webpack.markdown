@@ -107,10 +107,6 @@ Below is the configuration for each of the [loaders](https://webpack.js.org/conc
   },
   ```
 * _**CSS / Less Files**_ loader config:
-
-  <details>
-    <summary>Click to expand!</summary>
-
     ```js
     const MiniCssExtractPlugin = require('mini-css-extract-plugin');
     ...
@@ -167,7 +163,7 @@ Below is the configuration for each of the [loaders](https://webpack.js.org/conc
       ]
   }
     ```
-  </details>
+    
 * _**Static resources / images (required in less files)**_ - Some of the images would be 'required' by the less files, in which case they'd be picked up by webpack through the `file-loader` as configured below.
     ```javascript
   {
