@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Information that can be found elsewhere.
-email:
+email: 
 description: >- # this means to ignore newlines until "baseurl:"
   This blog exists because I have a terrible memory.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -26,11 +26,11 @@ github_username:  bnek
 markdown: kramdown
 theme: minima
 author: Copyright 2019 B. Meyer
-#disqus:
-#  shortname: bnek
+disqus:
+  shortname: bnek
 plugins:
   - jekyll-feed
-
+comments: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
