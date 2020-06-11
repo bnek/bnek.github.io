@@ -46,6 +46,26 @@ I took a look at the [webpack docs](https://webpack.js.org/guides/getting-starte
 * add an `index.js` entry point for webpack
 * add an `index.html` template to inject the emitted bundles into (optional) (I used the old gulp template because it had links to external scripts and other required code).
 
+### 2.1.1 Running the dev server
+This project's development configuration relied on the single page app (SPA) being served with the backend from one server (rather than having a separate dev server running for the frontend like it's popular these days).
+
+The proxy function of the webpack dev server comes in handy as it can be configured to transparently route requests to a certain path to another host/port. This way, the webpack dev server can be used separately and the configuration of the SPA does not need to be changed.
+
+```js
+config.devServer = {
+    contentBase: `./${conf.paths.dist}`,
+    port: 5000,
+    proxy: {
+        // api requests to the path '/client' will be proxied to a different host
+        '/client': {
+            target: 'https://localhost:44300',
+            secure: false,
+            changeOrigin: true
+        },
+    },
+}
+```
+
 ------
 
 
@@ -227,28 +247,6 @@ Below is the configuration for each of the [loaders](https://webpack.js.org/conc
       ...
     ]
     ```
-------
-
-### 2.4 Running the dev server
-This project's development configuration relied on the single page app (SPA) being served with the backend from one server (rather than having a separate dev server running for the frontend like it's popular these days).
-
-The proxy function of the webpack dev server comes in handy as it can be configured to transparently route requests to a certain path to another host/port. This way, the webpack dev server can be used separately and the configuration of the SPA does not need to be changed.
-
-```js
-config.devServer = {
-    contentBase: `./${conf.paths.dist}`,
-    // dev server runs on port 5000
-    port: 5000,
-    proxy: {
-        // api requests to the path '/client' will be proxied to a different host
-        '/client': {
-            target: 'https://localhost:44300',
-            secure: false,
-            changeOrigin: true
-        },
-    },
-}
-```
 ------
 
 ## Conclusion
