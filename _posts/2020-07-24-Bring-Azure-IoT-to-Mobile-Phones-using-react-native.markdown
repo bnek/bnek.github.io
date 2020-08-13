@@ -87,4 +87,4 @@ Now that we've established that we can run code that requires a node-js runtime 
     export default App;
     ```
     the resulting output should be as follows: 
-    ![Screenshot 1]({{ site.url }}/assets/images/2020-07-24-iot-react-native/screen1.png =250x)
+    <img src="{{ site.url }}/assets/images/2020-07-24-iot-react-native/screen1.png" alt="Screenshot 1" width="200"/>
