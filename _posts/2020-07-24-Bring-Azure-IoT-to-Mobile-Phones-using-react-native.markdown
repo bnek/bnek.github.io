@@ -35,55 +35,56 @@ Now that we've established that we can run code that requires a node-js runtime 
 * Install nodejs-mobile-react-native: `npm install --save nodejs-mobile-react-native`
 * in the `nodejs-assets` folder, remove the `sample-` prefix from the files so that you have a `main.js` and a `package.json` file. The `main.js` file becomes the entry point for the node-js application running alongside the react-native app.
 * replace the content of `App.tsx` with the following content (which will start the node-js app, listen for messages and display them in a `Text` component).
-```tsx
-import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  StatusBar,
-  Text,
-} from 'react-native';
-import nodejs from 'nodejs-mobile-react-native';
 
-class App extends Component<{}, { logs: string[]; message: string }> {
-  constructor(props: any) {
-    super(props);
-    this.state = { logs: ['starting'], message: '' };
-  }
+    ```tsx
+    import React, { Component } from 'react';
+    import {
+        SafeAreaView,
+        ScrollView,
+        View,
+        StatusBar,
+        Text,
+    } from 'react-native';
+    import nodejs from 'nodejs-mobile-react-native';
 
-  componentWillMount() {
-    nodejs.start('main.js');
-    nodejs.channel.addListener(
-      'message',
-      (msg) => this.log(msg),
-      this,
-    );
-    this.log('done, waiting for messages from channel');
-  }
+    class App extends Component<{}, { logs: string[]; message: string }> {
+    constructor(props: any) {
+        super(props);
+        this.state = { logs: ['starting'], message: '' };
+    }
 
-  public render() {
-    return (
-      <>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View>
-              {this.state.logs.map((s, i) => (
-                <Text key={`log${i}`}>{s}</Text>
-              ))}
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </>
-    );
-  }
+    componentWillMount() {
+        nodejs.start('main.js');
+        nodejs.channel.addListener(
+        'message',
+        (msg) => this.log(msg),
+        this,
+        );
+        this.log('done, waiting for messages from channel');
+    }
 
-  private log(msg: string) {
-    this.setState({ logs: [...this.state.logs, msg] });
-  }
-}
-export default App;
-```
-the resulting output should be as follows: 
-![Screenshot 1]({{ site.url }}/assets/images/2020-07-24-iot-react-native/screen1.png)
+    public render() {
+        return (
+        <>
+            <StatusBar barStyle="dark-content" />
+            <SafeAreaView>
+            <ScrollView contentInsetAdjustmentBehavior="automatic">
+                <View>
+                {this.state.logs.map((s, i) => (
+                    <Text key={`log${i}`}>{s}</Text>
+                ))}
+                </View>
+            </ScrollView>
+            </SafeAreaView>
+        </>
+        );
+    }
+
+    private log(msg: string) {
+        this.setState({ logs: [...this.state.logs, msg] });
+    }
+    }
+    export default App;
+    ```
+    the resulting output should be as follows: 
+    ![Screenshot 1]({{ site.url }}/assets/images/2020-07-24-iot-react-native/screen1.png =250x)
