@@ -4,7 +4,7 @@ title:  "Bring Azure IoT to mobile phones with react-native"
 date:   2020-06-10 16:16:06 +1000
 categories: code
 ---
-tl;dr if you want to skip the boring blurbs, just skip straight to `steps to reproduce`.
+TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce).
 
 ## the goal
 I'm personally interested in the IoT space and after a few experiments with Azure IoT Hub and some samples I wanted to run some code on a real device rather than simulating one from the console. I have a spare Android mobile phone and I thought it would be great to deploy and run some code on that as a PoC.
@@ -99,7 +99,7 @@ Now that we've established that we can run code that requires a node-js runtime 
 * Now we can add the Azure IoT device SDK:
 * change to the node-js project directory: `cd ./nodejs-assets/nodejs-project`
 * `npm install --save azure-iot-device azure-iot-device-http`
-* We're now adding code to connect to IoT hub and to send/receive messages using the `azure-iot-device-sdk` using Http transport. Please note that you need your device connection string here to connect via `Client.fromConnectionString(...)` - **Please note that this is a PoC only and connection string should not be checked into source code. Also, for security considerations, I suggest to read "[Understand Azure IoT Hub security | Microsoft Docs](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-security)"**
+* We're now adding code to connect to IoT hub and to send/receive messages using the `azure-iot-device-sdk` using Http transport. Please note that you need your device connection string here to connect via `Client.fromConnectionString(...)` - **Please note that this is a PoC only and connection string should not be checked into source code. Also, for security considerations, I suggest to read "[Understand Azure IoT Hub security](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-security)" from the Microsoft Docs**
 * In the `nodejs-assets/nodejs-project` folder replace the content of `main.js` with the following:
     ```js
     const Client = require('azure-iot-device').Client;
