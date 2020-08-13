@@ -7,7 +7,7 @@ tags: azure iot hub device sdk react-native android ios mobile
 ---
 TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or chceckout the [code on GitHub](https://github.com/bnek/react-native-and-iot).
 
-## the goal
+## the goal - use Azure IoT Hub device SDK for Node.js within React Native
 I'm personally interested in the IoT space and after a few experiments with Azure IoT Hub and some samples I wanted to run some code on a real device rather than simulating one from the console. I have a spare Android mobile phone and I thought it would be great to deploy and run some code on that as a PoC.
 
 #### React Native
@@ -17,7 +17,7 @@ Time is precious, so I did not want to spend a lot of time on boiler plate / inf
 
 For the same reason as above, I did not want to write any custom code to interact with the IoT Hub but rather make use of Microsoft's official [Azure IoT Hub device SDK](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-hub-device-sdks).
 
-## the challenge
+## the challenge - there is no Node.js runtime on Android (or iOS)
 The Azure IoT Hub device SDK for Node.js needs a node-js runtime, which does not exists on Android. 
 
 After some googlin' I found out there is a pretty active project called [nodejs-mobile](https://github.com/JaneaSystems/nodejs-mobile) and even better - they published a React Native plugin: [nodejs-mobile-react-native](https://github.com/janeasystems/nodejs-mobile-react-native). It allows you to create a node-js aplication project and run it alongside your React Native project. It provides an api for inter-process communication between the React Native app and the node-js app (which is running in a different thread). Both, the node-js app and the node-js runtime are deployed alogside the React Native application bundle (because they're part of it).
