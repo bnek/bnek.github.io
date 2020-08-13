@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bring Azure IoT to Mobile Phones with React Native"
+title:  "Bring Azure IoT Hub device SDK for Node.js to Mobile Phones with React Native and Node.js for Mobile Apps"
 date:   2020-06-10 16:16:06 +1000
 categories: code
 tags: azure iot hub device sdk react-native android ios mobile
@@ -20,8 +20,7 @@ For the same reason as above, I did not want to write any custom code to interac
 ## the challenge
 The Azure IoT Hub device SDK for Node.js needs a node-js runtime, which does not exists on Android. 
 
-After some googlin' I found out there is a pretty active project called [nodejs-mobile](https://github.com/JaneaSystems/nodejs-mobile) and even better - they published a React Native plugin: [nodejs-mobile-react-native
-](https://github.com/janeasystems/nodejs-mobile-react-native). It allows you to create a node-js aplication project and run it alongside your React Native project. It provides an api for inter-process communication between the React Native app and the node-js app (which is running in a different thread). Both, the node-js app and the node-js runtime are deployed alogside the React Native application bundle (because they're part of it).
+After some googlin' I found out there is a pretty active project called [nodejs-mobile](https://github.com/JaneaSystems/nodejs-mobile) and even better - they published a React Native plugin: [nodejs-mobile-react-native](https://github.com/janeasystems/nodejs-mobile-react-native). It allows you to create a node-js aplication project and run it alongside your React Native project. It provides an api for inter-process communication between the React Native app and the node-js app (which is running in a different thread). Both, the node-js app and the node-js runtime are deployed alogside the React Native application bundle (because they're part of it).
 
 Now that we've established that we can run code that requires a node-js runtime alogside a React Native app, it should be possible to have an android device talking to Azure IoT Hub via javascript sdk with only writing a few lines of code, right? So let's try it out.
 
