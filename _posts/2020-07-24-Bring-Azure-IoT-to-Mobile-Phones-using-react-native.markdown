@@ -1,28 +1,29 @@
 ---
 layout: post
-title:  "Bring Azure IoT to mobile phones with react-native"
+title:  "Bring Azure IoT to Mobile Phones with React Native"
 date:   2020-06-10 16:16:06 +1000
 categories: code
+tags: azure iot hub device sdk react-native android ios mobile
 ---
 TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce).
 
 ## the goal
 I'm personally interested in the IoT space and after a few experiments with Azure IoT Hub and some samples I wanted to run some code on a real device rather than simulating one from the console. I have a spare Android mobile phone and I thought it would be great to deploy and run some code on that as a PoC.
 
-#### React-native
-Time is precious, so I did not want to spend a lot of time on boiler plate / infrastructure set-up, so I chose `react-native` as a base as I'm already familiar with it and it is easy to set up and it pretty much provides you with a deployable app shell with a few commands on the CLI. Also, this would open up avenues to iOS devices later.
+#### React Native
+Time is precious, so I did not want to spend a lot of time on boiler plate / infrastructure set-up, so I chose React Native as a base as I'm already familiar with it and it is easy to set up and it pretty much provides you with a deployable app shell with a few commands on the CLI. Also, this would open up avenues to iOS devices later.
 
-#### azure-iot-device sdk
+#### Azure IoT Hub device SDK for Node.js
 
-For the same reason as above, I did not want to write any custom code to interact with the IoT Hub but rather make use of Microsoft's official [azure-iot-device sdk](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-hub-device-sdks) for javascript.
+For the same reason as above, I did not want to write any custom code to interact with the IoT Hub but rather make use of Microsoft's official [Azure IoT Hub device SDK](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-hub-device-sdks).
 
 ## the challenge
-The `azure-iot-device sdk` needs a node-js runtime, which does not exists on Android. 
+The Azure IoT Hub device SDK for Node.js needs a node-js runtime, which does not exists on Android. 
 
-After some googlin' I found out there is a pretty active project called [nodejs-mobile](https://github.com/JaneaSystems/nodejs-mobile) and even better - they published a react-native plugin: [nodejs-mobile-react-native
-](https://github.com/janeasystems/nodejs-mobile-react-native). It allows you to create a node-js aplication project and run it alongside your React-Native project. It provides an api for inter-process communication between the React-Native app and the node-js app (which is running in a different thread). Both, the node-js app and the node-js runtime are deployed alogside the React-Native application bundle (because they're part of it).
+After some googlin' I found out there is a pretty active project called [nodejs-mobile](https://github.com/JaneaSystems/nodejs-mobile) and even better - they published a React Native plugin: [nodejs-mobile-react-native
+](https://github.com/janeasystems/nodejs-mobile-react-native). It allows you to create a node-js aplication project and run it alongside your React Native project. It provides an api for inter-process communication between the React Native app and the node-js app (which is running in a different thread). Both, the node-js app and the node-js runtime are deployed alogside the React Native application bundle (because they're part of it).
 
-Now that we've established that we can run code that requires a node-js runtime alogside a react-native app, it should be possible to have an android device talking to Azure IoT Hub via javascript sdk with only writing a few lines of code, right? So let's try it out.
+Now that we've established that we can run code that requires a node-js runtime alogside a React Native app, it should be possible to have an android device talking to Azure IoT Hub via javascript sdk with only writing a few lines of code, right? So let's try it out.
 
 ## steps to reproduce
 * Prerequisites
@@ -96,10 +97,10 @@ Now that we've established that we can run code that requires a node-js runtime 
     from node-js: Node was initialized.
     ```
 * If you see an error in the metro server console relating to a `Duplicate module name` error, please follow the instructions [here](https://github.com/janeasystems/nodejs-mobile-react-native#duplicate-module-name).
-* Now we can add the Azure IoT device SDK:
+* Now we can add the Azure IoT Hub device SDK:
 * Change to the node-js project directory: `cd ./nodejs-assets/nodejs-project`
-* Install azure-iot-device sdk and HTTP transport package `npm install --save azure-iot-device azure-iot-device-http`
-* We're now adding code to connect to IoT hub and to send/receive messages using the `azure-iot-device-sdk` using Http transport. Please note that you need your device connection string here to connect via `Client.fromConnectionString(...)` - **Please note that this is a PoC only and connection string should not be checked into source code. Also, for security considerations, I suggest to read "[Understand Azure IoT Hub security](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-security)" from the Microsoft Docs**
+* Install Azure IoT Hub device SDK and HTTP transport package `npm install --save azure-iot-device azure-iot-device-http`
+* We're now adding code to connect to IoT hub and to send/receive messages using the Azure IoT Hub device SDK using Http transport. Please note that you need your device connection string here to connect via `Client.fromConnectionString(...)` - **Please note that this is a PoC only and connection string should not be checked into source code. Also, for security considerations, I suggest to read "[Understand Azure IoT Hub security](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-security)" from the Microsoft Docs**
 * In the `nodejs-assets/nodejs-project` folder replace the content of `main.js` with the following:
     ```js
     const Client = require('azure-iot-device').Client;
@@ -148,7 +149,7 @@ Now that we've established that we can run code that requires a node-js runtime 
     sendErr('Could not connect: ' + err.message);
     });
     ```
-* In the React native app, we'll add a text field and button to send text-based messages to IoT hub replace the content off the `App.tsx` with the following:
+* In the React Native app, we'll add a text field and button to send text-based messages to IoT Hub replace the content off the `App.tsx` with the following:
     ```tsx
     import React, { Component } from 'react';
     import {
@@ -220,4 +221,4 @@ Now that we've established that we can run code that requires a node-js runtime 
 * I have borrowed heavily from the [azure-iot-sdk sample code](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples).
 
 ## conclusion
-It's possible to run node-js alongside react-native applications and therefore make use of the azure-iot-device sdk for node-js on mobile devices.
+It's possible to run node-js alongside React Native applications and therefore make use of the Azure IoT Hub device SDK for Node.js on mobile devices.
