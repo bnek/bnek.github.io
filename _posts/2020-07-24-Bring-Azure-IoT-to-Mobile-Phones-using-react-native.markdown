@@ -29,7 +29,7 @@ Now that we've established that we can run code that requires a node-js runtime 
   * Windows 10 
   * [Node.js](https://nodejs.org/en/download/) v12.18.0 x64 (or compatible)
   * An [Azure IoT Hub / device created and a device connection string](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-create-through-portal) available to use to connect the app.
-* Create the app shell React-Native project
+* Creating the app shell React Native project
   * Follow the instructions on '[getting started with react native](https://reactnative.dev/docs/0.61/getting-started)' - make sure you use the 'React Native CLI Quickstart', not Expo which is default.
   * I chose to use TypeScript: `npx react-native init ReactNativeAndIot --template react-native-template-typescript`
   * `cd ReactNativeAndIot`
