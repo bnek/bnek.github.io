@@ -26,9 +26,9 @@ Now that we've established that we can run code that requires a node-js runtime 
 
 ## steps to reproduce
 * Prerequisites
- * Windows 10 
- * node v12.18.0 x64 (or compatible)
- * An [Azure IoT Hub / device created and a device connection string](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-create-through-portal) available to use to connect the app.
+  * Windows 10 
+  * [Node.js](https://nodejs.org/en/download/) v12.18.0 x64 (or compatible)
+  * An [Azure IoT Hub / device created and a device connection string](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-create-through-portal) available to use to connect the app.
 * Create the app shell React-Native project
   * Follow the instructions on '[getting started with react native](https://reactnative.dev/docs/0.61/getting-started)' - make sure you use the 'React Native CLI Quickstart', not Expo which is default.
   * I chose to use TypeScript: `npx react-native init ReactNativeAndIot --template react-native-template-typescript`
@@ -36,8 +36,8 @@ Now that we've established that we can run code that requires a node-js runtime 
   * Start the Android Emulator
   * Make sure you can run the app in the simulator after it has been generated: `npx react-native run-android`
 * Install nodejs-mobile-react-native: `npm install --save nodejs-mobile-react-native`
-* in the `nodejs-assets/nodejs-project` folder, remove the `sample-` prefix from the files so that you have a `main.js` and a `package.json` file. The `main.js` file becomes the entry point for the node-js application running alongside the react-native app.
-* replace the content of `App.tsx` with the following content (which will start the node-js app, listen for messages and display them in a `Text` component).
+* In the `nodejs-assets/nodejs-project` folder, remove the `sample-` prefix from the files so that you have a `main.js` and a `package.json` file. The `main.js` file becomes the entry point for the node-js application running alongside the react-native app.
+* Replace the content of `App.tsx` with the following content (which will start the node-js app, listen for messages and display them in a `Text` component).
 
     ```tsx
     import React, { Component } from 'react';
@@ -97,8 +97,8 @@ Now that we've established that we can run code that requires a node-js runtime 
     ```
 * If you see an error in the metro server console relating to a `Duplicate module name` error, please follow the instructions [here](https://github.com/janeasystems/nodejs-mobile-react-native#duplicate-module-name).
 * Now we can add the Azure IoT device SDK:
-* change to the node-js project directory: `cd ./nodejs-assets/nodejs-project`
-* `npm install --save azure-iot-device azure-iot-device-http`
+* Change to the node-js project directory: `cd ./nodejs-assets/nodejs-project`
+* Install azure-iot-device sdk and HTTP transport package `npm install --save azure-iot-device azure-iot-device-http`
 * We're now adding code to connect to IoT hub and to send/receive messages using the `azure-iot-device-sdk` using Http transport. Please note that you need your device connection string here to connect via `Client.fromConnectionString(...)` - **Please note that this is a PoC only and connection string should not be checked into source code. Also, for security considerations, I suggest to read "[Understand Azure IoT Hub security](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-security)" from the Microsoft Docs**
 * In the `nodejs-assets/nodejs-project` folder replace the content of `main.js` with the following:
     ```js
@@ -218,3 +218,6 @@ Now that we've established that we can run code that requires a node-js runtime 
     ```
 * Now you should be able to send messages to the IoT Hub using the text field / button on the UI. Cloud-to-Device messages should be displayed in the log.
 * I have borrowed heavily from the [azure-iot-sdk sample code](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples).
+
+## conclusion
+It's possible to run node-js alongside react-native applications and therefore make use of the azure-iot-device sdk for node-js on mobile devices.
