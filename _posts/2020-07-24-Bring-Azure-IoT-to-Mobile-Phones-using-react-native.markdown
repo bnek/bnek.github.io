@@ -5,7 +5,7 @@ date:   2020-06-10 16:16:06 +1000
 categories: code
 tags: azure iot hub device sdk react-native android ios mobile
 ---
-TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce).
+TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or chceckout the [code on GitHub](https://github.com/bnek/react-native-and-iot).
 
 ## the goal
 I'm personally interested in the IoT space and after a few experiments with Azure IoT Hub and some samples I wanted to run some code on a real device rather than simulating one from the console. I have a spare Android mobile phone and I thought it would be great to deploy and run some code on that as a PoC.
@@ -219,6 +219,7 @@ Now that we've established that we can run code that requires a node-js runtime 
     ```
 * Now you should be able to send messages to the IoT Hub using the text field / button on the UI. Cloud-to-Device messages should be displayed in the log.
 * I have borrowed heavily from the [azure-iot-sdk sample code](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples).
+* All code can be found in this [repo on GitHub](https://github.com/bnek/react-native-and-iot).
 
 ## conclusion
 It's possible to run node-js alongside React Native applications and therefore make use of the Azure IoT Hub device SDK for Node.js on mobile devices.
