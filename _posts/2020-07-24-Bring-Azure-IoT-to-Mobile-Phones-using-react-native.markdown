@@ -5,7 +5,7 @@ date:   2020-08-13 16:16:06 +1000
 categories: code
 tags: azure iot hub device sdk react-native android ios mobile
 ---
-TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or chceckout the [code on GitHub](https://github.com/bnek/react-native-and-iot).
+TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or checkout the [code on GitHub](https://github.com/bnek/react-native-and-iot).
 
 ## the goal - use Azure IoT Hub device SDK for Node.js within React Native
 I'm personally interested in the IoT space and after a few experiments with Azure IoT Hub and some samples I wanted to run some code on a real device rather than simulating one from the console. I have a spare Android mobile phone and I thought it would be great to deploy and run some code on that as a PoC.
