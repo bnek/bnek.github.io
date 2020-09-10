@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Bring Azure IoT Hub device SDK for Node.js to Mobile Phones with React Native and Node.js for Mobile Apps"
-date:   2020-06-10 16:16:06 +1000
+date:   2020-08-13 16:16:06 +1000
 categories: code
 tags: azure iot hub device sdk react-native android ios mobile
 ---
