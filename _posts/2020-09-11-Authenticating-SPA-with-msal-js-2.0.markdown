@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Say Goodbye to the OAuth implicit flow with MSAL 2"
-date:   2020-08-13 16:16:06 +1000
+date:   2020-09-17 16:16:06 +1000
 categories: code
 tags: azure msal 2.x authentication authorisation code flow pkce
 ---
