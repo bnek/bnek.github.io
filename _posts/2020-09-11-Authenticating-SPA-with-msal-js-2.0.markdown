@@ -49,6 +49,7 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
 * Secure the API by adding middleware to handle OpenID Connect Bearer token [here is the link to the complete commit](https://github.com/bnek/examples/commit/4697006fd1e32e909df98e9ef2a5a995bb7effba).
   * Install nuget package `Microsoft.AspNetCore.Authentication.JwtBearer`
   * Add the following lines to the beginning of the `Startup.ConfigureServices` method:
+  
   ```c#
   services.AddAuthentication(options =>
   {
