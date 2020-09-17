@@ -28,13 +28,13 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
   * Windows 10 
   * Visual Studio 2019
   * dotnet sdk v3.1.401
-* Creating an ASP.NET Core 3.1 web app with React
+* **[Commit 1](https://github.com/bnek/examples/commit/c5d411fecad47802208289a215cc9700d1fb99e1)**: Creating an ASP.NET Core 3.1 web app with React
   * File->New project
   * ASP.NET Core Web Application (name it i.e. "Msal2") -> Create
   * Choose .NET Core 3.1, React.js (the auth code won't be React-specific)
   * Choose 'No Authentication'
   * Create (the app will be scaffolded)
-* Let's modify `Home.js` to fetch and display today's weather forecast. Authetication is not yet enabled in the API so we can get away with an unauthenticated call - [here is the link to the complete Home.js file](https://github.com/bnek/examples/blob/7492989c0241789285e9d041ab3e37c0a8e8116f/web/msal-2-auth-code-flow-spa-aspnet-core-31/Msal2/ClientApp/src/components/Home.js) for this step. The App will now display tomorrow's weather. Here is the link [to the commit](https://github.com/bnek/examples/commit/7eab6bcc62f5da318b213b096a0e23a50d5f8857).
+* **[Commit 2](https://github.com/bnek/examples/commit/7eab6bcc62f5da318b213b096a0e23a50d5f8857)**: Let's modify `Home.js` to fetch and display today's weather forecast. Authetication is not yet enabled in the API so we can get away with an unauthenticated call - [here is the link to the complete Home.js file](https://github.com/bnek/examples/blob/7492989c0241789285e9d041ab3e37c0a8e8116f/web/msal-2-auth-code-flow-spa-aspnet-core-31/Msal2/ClientApp/src/components/Home.js) for this step. The App will now display tomorrow's weather.
   ```jsx
   //...
     fetchWeather() {
@@ -46,32 +46,32 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
     }
   //...
   ```
-* Secure the API by adding middleware to handle OpenID Connect Bearer token [here is the link to the complete commit](https://github.com/bnek/examples/commit/4697006fd1e32e909df98e9ef2a5a995bb7effba).
+* **[Commit 3](https://github.com/bnek/examples/commit/4697006fd1e32e909df98e9ef2a5a995bb7effba)**: Secure the API by adding middleware to handle OpenID Connect Bearer token.
   * Install nuget package `Microsoft.AspNetCore.Authentication.JwtBearer`
   * Add the following lines to the beginning of the `Startup.ConfigureServices` method:
-  
-  ```c#
-  services.AddAuthentication(options =>
-  {
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-  })
-  .AddJwtBearer(jwtOptions =>
-  {
-    var instance = Configuration["AzureAd:Instance"];
-    var domain = Configuration["AzureAd:Domain"];
 
-    jwtOptions.Authority = $"{instance}/{domain}/v2.0/";
-    jwtOptions.Audience = Configuration["AzureAd:ClientId"];
-  });
+    ```c#
+    services.AddAuthentication(options =>
+    {
+      options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(jwtOptions =>
+    {
+      var instance = Configuration["AzureAd:Instance"];
+      var domain = Configuration["AzureAd:Domain"];
 
-  services.AddAuthorization(options =>
-  {
-    options.DefaultPolicy = new AuthorizationPolicyBuilder()
-      .RequireAuthenticatedUser()
-      .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-      .Build();
-  });
-  ```
+      jwtOptions.Authority = $"{instance}/{domain}/v2.0/";
+      jwtOptions.Audience = Configuration["AzureAd:ClientId"];
+    });
+
+    services.AddAuthorization(options =>
+    {
+      options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+        .Build();
+    });
+    ```
   * Add the following lines to the `Startup.Configure` method to configure the pipeline to use the auth middleware:
   ```c#
     app.UseAuthorization();
@@ -80,7 +80,7 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
   * Open `appsettings.json` and replace the values for `TenantId`, `ClientId` and `Domain` with valid values from your Azure AD app registration.
   * Finally, we add the `[Authorize]` attribute to the weather forecast endpoint.
   * Now the `fetch('/weatherforecast')` call will result in a 401 (Unauthorized) response due to a missing valid JWT.
-* Finally, we add the package `@azure/msal-browser` to our client code and acquire an access token from Azure AD that we then use to call the API. Here is the [link to the commit](https://github.com/bnek/examples/commit/7492989c0241789285e9d041ab3e37c0a8e8116f).
+* **[Commit 4](https://github.com/bnek/examples/commit/7492989c0241789285e9d041ab3e37c0a8e8116f)**: Finally, we add the package `@azure/msal-browser` to our client code and acquire an access token from Azure AD that we then use to call the API.
   * Install msal-browser by typing `npm install --save @azure/msal-browser`
   * The call to `myMSALObj.loginRedirect(loginRequest)` will request an authorisation code (`response_type: code`) which then will be used to request an access token.
   * We then use that access token to call the API:
@@ -97,4 +97,4 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
   ```
  
 ## Conclusion
-MSAL.js 2.x supports the authorisation code flow with PKCE as opposed to MSAL.js 1.x (and ADAL.js), which uses the implicit flow. With the updates OAuth security best practices advising [against using the implicit flow](https://tools.ietf.org/html/draft-ietf-oauth-security-topics-15#section-2.1.2) I will make use of MSAL.js 2.x in favour of 1.x / ADAL.js to take advantage of the improved security of the library.
+MSAL.js 2.x supports the authorisation code flow with PKCE as opposed to MSAL.js 1.x (and ADAL.js), which uses the implicit flow. With the updates OAuth security best practices advising [against using the implicit flow](https://tools.ietf.org/html/draft-ietf-oauth-security-topics-15#section-2.1.2) it's a good idea to choose MSAL.js 2.x over version 1.x for new projects and update existing projects to use the most recent version.
