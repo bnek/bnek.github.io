@@ -5,7 +5,7 @@ date:   2020-08-13 16:16:06 +1000
 categories: code
 tags: azure msal 2.x authentication authorisation code flow pkce
 ---
-TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or checkout the [code on GitHub](https://github.com/bnek/react-native-and-iot).
+TL;DR If you want to skip the blurbs, just go straight to [steps to reproduce](#steps-to-reproduce) or checkout the [code on GitHub](https://github.com/bnek/examples/tree/master/web/msal-2-auth-code-flow-spa-aspnet-core-31).
 
 ## Authentication in SPAs using OAuth 2 authorisation code flow with MSAL.js 2.x and consuming a .NET Core 3.1 API
 
