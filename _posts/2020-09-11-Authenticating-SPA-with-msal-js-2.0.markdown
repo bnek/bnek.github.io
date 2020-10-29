@@ -46,7 +46,7 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
     }
   //...
   ```
-* **[Commit 3](https://github.com/bnek/examples/commit/4697006fd1e32e909df98e9ef2a5a995bb7effba)**: Secure the API by adding middleware to handle OpenID Connect Bearer token.
+* **[Commit 3](https://github.com/bnek/examples/commit/b77263c3885302ae7b56f814943b73e42e3e6dbd)**: Secure the API by adding middleware to handle OpenID Connect Bearer token.
   * Install nuget package `Microsoft.AspNetCore.Authentication.JwtBearer`
   * Add the following lines to the beginning of the `Startup.ConfigureServices` method:
 
@@ -63,24 +63,16 @@ Using MSAL.js 2.x, SPAs can now authenticate against Azure AD using the authoris
       jwtOptions.Authority = $"{instance}/{domain}/v2.0/";
       jwtOptions.Audience = Configuration["AzureAd:ClientId"];
     });
-
-    services.AddAuthorization(options =>
-    {
-      options.DefaultPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-        .Build();
-    });
     ```
   * Add the following lines to the `Startup.Configure` method to configure the pipeline to use the auth middleware:
   ```c#
-    app.UseAuthorization();
     app.UseAuthentication();
+    app.UseAuthorization();
   ```
   * Open `appsettings.json` and replace the values for `TenantId`, `ClientId` and `Domain` with valid values from your Azure AD app registration.
   * Finally, we add the `[Authorize]` attribute to the weather forecast endpoint.
   * Now the `fetch('/weatherforecast')` call will result in a 401 (Unauthorized) response due to a missing valid JWT.
-* **[Commit 4](https://github.com/bnek/examples/commit/7492989c0241789285e9d041ab3e37c0a8e8116f)**: Finally, we add the package `@azure/msal-browser` to our client code and acquire an access token from Azure AD that we then use to call the API.
+* **[Commit 4](https://github.com/bnek/examples/commit/c8d55d47f76ef0a942b910e1ccadd01180f4da08)**: Finally, we add the package `@azure/msal-browser` to our client code and acquire an access token from Azure AD that we then use to call the API.
   * Install msal-browser by typing `npm install --save @azure/msal-browser`
   * The call to `myMSALObj.loginRedirect(loginRequest)` will request an authorisation code (`response_type: code`) which then will be used to request an access token.
   * We then use that access token to call the API:
